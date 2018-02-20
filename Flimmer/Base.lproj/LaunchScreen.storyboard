@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Menlo.ttc">
+            <string>Menlo-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -18,15 +23,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LAUNCH!!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsi-ol-vB9">
-                                <rect key="frame" x="117" y="257" width="140" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fog" translatesAutoresizingMaskIntoConstraints="NO" id="dqn-zR-I0k">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FLIMMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsi-ol-vB9">
+                                <rect key="frame" x="102.5" y="310" width="169" height="47"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dqn-zR-I0k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Etn-kI-hOB"/>
+                            <constraint firstItem="dqn-zR-I0k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KpW-rA-2Kw"/>
+                            <constraint firstItem="jsi-ol-vB9" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Vo6-Cs-r7v"/>
+                            <constraint firstItem="jsi-ol-vB9" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="g6Q-fU-S2j"/>
+                            <constraint firstItem="dqn-zR-I0k" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="gCy-OL-eVu"/>
+                            <constraint firstItem="dqn-zR-I0k" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="lfG-Ka-4Ft"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -35,4 +50,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fog" width="900" height="599"/>
+    </resources>
 </document>

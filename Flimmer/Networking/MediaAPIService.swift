@@ -10,31 +10,20 @@ import Foundation
 
 class MediaAPIService {
     
-    // Execute a call to the API, completionHandler is passback a option response of json.
-    func executeAPIRequest(url: URL, completionHandler: @escaping ([String:Any]?, Error?)-> Void){
-        
-        let sharedSession = URLSession.shared
-        let urlRequest =  URLRequest(url: url)
-        
-        let dataTask = sharedSession.dataTask(with: urlRequest) { (data, urlResponse, error) in
-            
-            guard let unwrappedData = data else {
-                completionHandler(nil,error)
+    // Generic network func, pass T :Decodable struct/class to use for the decoding.
+  func makeNetworkRequest<T: Decodable>(url: URL, type: T.Type, completionHandler: @escaping (_ error: Error?,_ data: T?) -> ()) {
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            do {
+                let decodedData = try JSONDecoder().decode(T.self, from: data!)
+                completionHandler(nil, decodedData)
+            } catch let error {
+                completionHandler(error, nil)
+                print(error)
                 return
             }
-        
-            do
-            {
-                let jsonResponse = try JSONSerialization.jsonObject(with: unwrappedData, options: .mutableContainers) as? [String:Any]
-                completionHandler(jsonResponse, error)
-                
-            } catch {
-                print(error.localizedDescription)
-                completionHandler(nil, error)
-            }
-            
-        }
-        
-        dataTask.resume()
+            }.resume()
     }
 }
+    
+    
+
