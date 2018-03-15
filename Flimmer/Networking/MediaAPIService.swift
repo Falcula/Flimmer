@@ -11,7 +11,7 @@ import Foundation
 class MediaAPIService {
     
     // Generic network func, pass T :Decodable struct/class to use for the decoding.
-  func makeNetworkRequest<T: Decodable>(url: URL, type: T.Type, completionHandler: @escaping (_ error: Error?,_ data: T?) -> ()) {
+    func makeNetworkRequest<T: Decodable>(url: URL, type: T.Type, completionHandler: @escaping (_ error: Error?,_ data: T?) -> ()) {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data!)
@@ -24,6 +24,6 @@ class MediaAPIService {
             }.resume()
     }
 }
-    
-    
+
+
 

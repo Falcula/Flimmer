@@ -24,5 +24,4 @@ class CacheManager {
         return getFromCache(key: key) != nil
     }
     
-    
 }

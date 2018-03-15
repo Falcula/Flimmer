@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 
 struct ImageRoot: Decodable {
     let data: Images
-   
+    
     enum CodingKeys: String, CodingKey {
         case data = "photos"
     }
@@ -24,7 +25,7 @@ struct Images: Decodable {
     let total: String
     let photo: [Image]
     
-
+    
 }
 
 struct Image: Decodable {
@@ -34,7 +35,6 @@ struct Image: Decodable {
     let server: String
     let farm: Int
     let owner: String
-    
 }
 
 

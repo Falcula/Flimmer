@@ -9,11 +9,6 @@
 import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
-    
+  
     @IBOutlet weak var ImageView: UIImageView!
-    
-    override func awakeFromNib() {
-        
-    }
-    
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class ImageCollectionViewModel {
     
@@ -16,27 +17,33 @@ class ImageCollectionViewModel {
     
     var images: [Image] = []
     
-    
-    var myImages : [Image] {
-        return self.images;
-    }
-    
-    func loadImages(completion: @escaping([Image]) -> Void) {
-      
-        //TODO: PUT IN OTHER LOCATION
-        let apipath = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=387fe5e3442fd10b79e33362e5cfc220&format=json&nojsoncallback=1&auth_token=72157691930598591-42f4859ccf389479&api_sig=3d011e2d54519bddeab629512e3e9f88"
+    func loadImages(query: String?, location: CLLocationCoordinate2D?, completion: @escaping() -> Void) {
         
+        var searchQuery: String = ""
+        if let query = query {
+            searchQuery = query
+        }
+        
+        let encodedQuery = searchQuery.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlFragmentAllowed)
+
+        var apipath = "\(MediaHelper.BASE_SERVICE_URL)?method=flickr.photos.search&api_key=\(MediaHelper.API_KEY)&tags=%22+%22&safe_search=3&text=\(encodedQuery!)&format=json&nojsoncallback=1&per_page=100"
+        
+        // If search by location, extend url.
+        if let location = location {
+            apipath.append("&lat=\(location.latitude)&lon=\(location.longitude)&radius=1")
+        }
+       
         let url = URL(string: apipath)
         self.mediaAPIService.makeNetworkRequest(url: url!, type: ImageRoot.self) { (error, resposeData) in
             
-                if let errorUnwrapped = error {
-                    print(errorUnwrapped.localizedDescription)
-                }
-                
-                if let responseDataUnWrapped = resposeData {
-                    self.images = responseDataUnWrapped.data.photo
-                    completion(self.images)
-                }
+            if let errorUnwrapped = error {
+                print(errorUnwrapped.localizedDescription)
+            }
+            
+            if let responseDataUnWrapped = resposeData {
+                self.images = responseDataUnWrapped.data.photo
+                completion()
+            }
             
         }
     }
@@ -56,7 +63,6 @@ class ImageCollectionViewModel {
                 if let imageUrl = MediaHelper.generateImageURL(data: self.images[index]) {
                     let imageData = NSData(contentsOf: imageUrl)
                     DispatchQueue.main.async {
-                        //cell.ImageView.image = UIImage(data: imageData! as Data)
                         completion(UIImage(data: imageData! as Data)!)
                         self.cacheManager.addToCache(key: cacheKey, object: UIImage(data: imageData! as Data)!)
                     }
