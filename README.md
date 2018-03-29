@@ -8,5 +8,5 @@ Technical features
 * Decodable protocol to map the application models with the JSON-data. 
 * Images is loaded asynchronously in a background thread.
 * All images is cached with NSCache.
-* MKMapView is used to search for images by geolocation, your current location or tap on map for a custom location.
+* MKMapView is used to search for images by geolocation.
 
