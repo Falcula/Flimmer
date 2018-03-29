@@ -6,7 +6,7 @@ Technical features
 * Integration with Flicker API https://www.flickr.com/services/api/
 * URLSessions is used to manage data tasks.
 * Decodable protocol to map the application models with the JSON-data. 
-* Images is loaded asynchronously in another thread.
+* Images is loaded asynchronously in a background thread.
 * All images is cached with NSCache.
 * Find images by geolocation, MKMapView is used.
 
