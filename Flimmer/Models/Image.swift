@@ -24,8 +24,6 @@ struct Images: Decodable {
     let perpage: Int
     let total: String
     let photo: [Image]
-    
-    
 }
 
 struct Image: Decodable {
